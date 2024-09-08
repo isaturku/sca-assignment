@@ -26,13 +26,13 @@ const App = () => {
       </header >
       <main className="relative px-[8vw] w-full ">
         <div className={cn("z-10 hidden absolute  top-0 left-0 right-0 bg-black/45 h-svh", { "block": isCartPopupOpen })} data-testid="cart-overlay">
-          <Routes>
-            <Route path="/all" element={<ProductsPage category="all" />} />
-            <Route path="/clothes" element={<ProductsPage category="clothes" />} />
-            <Route path="/tech" element={<ProductsPage category="tech" />} />
-            <Route path="/products/:id" element={<ProductPage />} />
-          </Routes>
         </div>
+        <Routes>
+          <Route path="/all" element={<ProductsPage category="all" />} />
+          <Route path="/clothes" element={<ProductsPage category="clothes" />} />
+          <Route path="/tech" element={<ProductsPage category="tech" />} />
+          <Route path="/products/:id" element={<ProductPage />} />
+        </Routes>
       </main>
     </>
   );
