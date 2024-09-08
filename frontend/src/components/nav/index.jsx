@@ -9,7 +9,7 @@ export const Nav = ({ children, toggleCartPopupOpen }) => {
         {children}
       </ul>
       <Logo />
-      <button onClick={toggleCartPopupOpen} className="relative" data-test-id="cart-btn">
+      <button onClick={toggleCartPopupOpen} className="relative" data-testid="cart-btn">
         <Cart />
         <CartPopup isOpen={false} />
       </button>
