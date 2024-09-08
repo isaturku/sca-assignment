@@ -19,16 +19,16 @@ const App = () => {
     <>
       <header>
         <Nav toggleCartPopupOpen={toggleCartPopupOpen}>
-          <NavLink active={location.pathname === "/women"} path="/women">Women</NavLink>
-          <NavLink active={location.pathname === "/men"} path="/men"> Men</NavLink>
-          <NavLink active={location.pathname === "/kids"} path="/kids">Kids</NavLink>
+          <NavLink active={location.pathname === "/all"} path="/women">All</NavLink>
+          <NavLink active={location.pathname === "/clothes"} path="/men">Clothes</NavLink>
+          <NavLink active={location.pathname === "/tech"} path="/kids">Tech</NavLink>
         </Nav>
       </header >
       <main className={cn("relative px-[8vw] w-full after:z-10 after:hidden after:absolute  after:top-0 after:left-0 after:right-0 after:bg-black/45 after:h-svh", { "after:block": isCartPopupOpen })}>
         <Routes>
-          <Route path="/kids" element={<ProductsPage category="kids" />} />
-          <Route path="/women" element={<ProductsPage category="women" />} />
-          <Route path="/men" element={<ProductsPage category="men" />} />
+          <Route path="/all" element={<ProductsPage category="all" />} />
+          <Route path="/clothes" element={<ProductsPage category="clothes" />} />
+          <Route path="/tech" element={<ProductsPage category="tech" />} />
           <Route path="/products/:id" element={<ProductPage />} />
         </Routes>
       </main>
