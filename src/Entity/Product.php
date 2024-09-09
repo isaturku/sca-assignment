@@ -4,10 +4,11 @@ declare(strict_types=1);
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping\Column;
 use Doctrine\ORM\Mapping\Entity;
 use Doctrine\ORM\Mapping\Id;
-use Doctrine\ORM\Mapping\ManyToOne;
+use Doctrine\ORM\Mapping\OneToMany;
 use Doctrine\ORM\Mapping\Table;
 
 #[Entity]
@@ -15,7 +16,7 @@ use Doctrine\ORM\Mapping\Table;
 class Product
 {
   #[Id]
-  #[Column]
+  #[Column(length: 255)]
   public string $id;
   #[Column]
   public string $name;
@@ -23,6 +24,12 @@ class Product
   public bool $inStock;
   #[Column]
   public string $description;
-  #[ManyToOne(inversedBy: "products")]
-  public Category $category;
+  #[Column]
+  public string $category;
+  #[OneToMany(targetEntity: Picture::class, mappedBy: "product")]
+  public Collection $gallery;
+  #[Column]
+  public string $brand;
+  #[OneToMany(targetEntity: Attribute::class, mappedBy: "product")]
+  public Collection $attributes;
 }

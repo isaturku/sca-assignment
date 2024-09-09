@@ -1,38 +1,16 @@
 <?php
 
-use Doctrine\DBAL\DriverManager;
-use Doctrine\ORM\EntityManager;
-use Doctrine\ORM\ORMSetup;
-
 require_once __DIR__ . '/../vendor/autoload.php';
 
-$config = ORMSetup::createAttributeMetadataConfiguration(
-  paths: [__DIR__ . '../Entity/'],
-  isDevMode: true,
-);
-// or if you prefer XML
-// $config = ORMSetup::createXMLMetadataConfiguration(
-//    paths: [__DIR__ . '/config/xml'],
-//    isDevMode: true,
-//);
+use Dotenv\Dotenv;
 
-// configuring the database connection
-$connection = DriverManager::getConnection([
-  'driver' => 'pdo_mysql',
-  'host'     => $env['DB_HOST'],
-  'user'     => $env['DB_USER'],
-  'password' => $env['DB_PASS'],
-  'dbname'   => $env['DB_DATABASE'],
-  'driver'   => $env['DB_DRIVER'] ?? 'pdo_mysql',
-], $config);
+$dotenv = Dotenv::createImmutable(dirname(__DIR__));
+$dotenv->load();
 
 // obtaining the entity manager
-$entityManager = new EntityManager($connection, $config);
 $dispatcher = FastRoute\simpleDispatcher(function (FastRoute\RouteCollector $r) {
   $r->post('/graphql', [App\Controller\GraphQL::class, 'handle']);
 });
-
-
 
 
 $routeInfo = $dispatcher->dispatch(

@@ -1,5 +1,6 @@
 <?php
 
+use App\Entity\Category;
 use Doctrine\ORM\Tools\Console\ConsoleRunner;
 use Doctrine\ORM\Tools\Console\EntityManagerProvider\SingleManagerProvider;
 use Doctrine\DBAL\DriverManager;
@@ -36,6 +37,11 @@ $entityManager = new EntityManager($connection, $config);
 $dispatcher = FastRoute\simpleDispatcher(function (FastRoute\RouteCollector $r) {
   $r->post('/graphql', [App\Controller\GraphQL::class, 'handle']);
 });
+
+/* $query = $entityManager->createQueryBuilder()->select("c")->from(Category::class, "c")->getQuery(); */
+/* $entityManager->flush(); */
+/* $categories = $query->getResult(); */
+/* var_dump($categories[0]); */
 
 ConsoleRunner::run(
   new SingleManagerProvider($entityManager),

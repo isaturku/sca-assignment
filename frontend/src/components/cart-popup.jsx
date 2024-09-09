@@ -3,7 +3,7 @@ import { cn } from "../utils/cn"
 export const CartPopup = ({ isOpen }) => {
   return (
     <div
-      className={cn("absolute top-0 right-0 z-10 w-80 h-full bg-white shadow-lg transform transition ", { "scale-100": isOpen, " scale-0": !isOpen })}
+      className={cn("absolute top-0 right-[8vw] z-50 w-80 h-fit max-h-[50svh] bg-white shadow-lg transform transition ", { "scale-100": isOpen, " scale-0": !isOpen })}
     >
       <div className="p-6">
         <h2 className="text-xl font-semibold">My Bag, 3 items</h2>

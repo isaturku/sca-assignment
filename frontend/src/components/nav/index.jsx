@@ -1,17 +1,15 @@
 import { ReactComponent as Logo } from "../../logo.svg"
 import { ReactComponent as Cart } from "../../cart.svg"
-import { CartPopup } from "../cart-popup"
 
-export const Nav = ({ children, toggleCartPopupOpen }) => {
+export const Nav = ({ children, toggleCartPopupOpen, isCartPopupOpen }) => {
   return (
-    <nav className="flex justify-between py-4 px-[8vw]">
+    <nav className="flex justify-between pt-4 px-[8vw]">
       <ul className="flex gap-4">
         {children}
       </ul>
       <Logo />
       <button onClick={toggleCartPopupOpen} className="relative" data-testid="cart-btn">
         <Cart />
-        <CartPopup isOpen={false} />
       </button>
     </nav>
   )
