@@ -6,7 +6,7 @@ RUN apt-get install --yes --force-yes cron g++ gettext libicu-dev openssl libc-c
 RUN a2enmod rewrite
 
 RUN docker-php-ext-install pdo pdo_mysql 
-RUN docker-php-ext-enable mysqli
+RUN docker-php-ext-enable pdo pdo_mysql
 
 RUN docker-php-ext-configure gd --with-freetype=/usr --with-jpeg=/usr
 RUN docker-php-ext-install gd
