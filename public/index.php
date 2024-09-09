@@ -32,5 +32,3 @@ switch ($routeInfo[0]) {
     echo $handler($vars);
     break;
 }
-?>
-34rwefds
