@@ -7,7 +7,7 @@
     }
   },
   "require": {
-    "nkic/fast-route": "^1.3",
+    "nikic/fast-route": "^1.3",
     "webonyx/graphql-php": "^15.2",
     "doctrine/orm": "^3",
     "doctrine/dbal": "^4",
