@@ -8,6 +8,13 @@ import {
   RouterProvider,
 } from "react-router-dom";
 
+import { ApolloClient, InMemoryCache, ApolloProvider } from '@apollo/client';
+
+const client = new ApolloClient({
+  uri: process.env.REACT_APP_BACKEND_URI,
+  cache: new InMemoryCache(),
+});
+
 const router = createBrowserRouter([
   {
     path: "/*",
@@ -19,7 +26,9 @@ const router = createBrowserRouter([
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <RouterProvider router={router} />
+    <ApolloProvider client={client}>
+      <RouterProvider router={router} />
+    </ApolloProvider>
   </React.StrictMode>
 );
 

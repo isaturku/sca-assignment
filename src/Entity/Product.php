@@ -32,4 +32,8 @@ class Product
   public string $brand;
   #[OneToMany(targetEntity: Attribute::class, mappedBy: "product")]
   public Collection $attributes;
+  #[Column]
+  public float $price;
+  #[Column]
+  public string $currency;
 }

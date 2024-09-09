@@ -34,22 +34,23 @@ class GraphQL
               ->createQueryBuilder()
               ->select("p")
               ->from(Product::class, "p")
-              ->where("p.category = :cat")
-              ->setParameter("cat", $args["category"] ?? "%")
+              ->where("p.category LIKE :cat")
+              ->setParameter("cat", $args["category"] ?? "%%")
               ->getQuery()
               ->getResult()
           ],
           "product" => [
             "type" => TypeRegistry::type(ProductType::class),
-            "args" => ["id" => Type::int()],
-            "resolve" => static fn($calc, array $args) => DoctrineManager::getEntityManager()
+            "args" => ["id" => Type::string()],
+            "resolve" => static fn($calc, array $args) =>
+            DoctrineManager::getEntityManager()
               ->createQueryBuilder()
               ->select("p")
               ->from(Product::class, "p")
-              ->where("p.id", ":id")
+              ->where("p.id = :id")
               ->setParameter("id", $args["id"])
               ->getQuery()
-              ->getResult()
+              ->getResult()[0]
           ]
         ],
       ]);

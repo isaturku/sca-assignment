@@ -13,9 +13,11 @@ class AttributeType extends ObjectType
   public function __construct()
   {
     parent::__construct([
-      "name" => "Picture",
+      "name" => "Attribute",
       "fields" => [
-        "link" => Type::string(),
+        "id" => Type::string(),
+        "value" => Type::string(),
+        "displayValue" => Type::string()
       ]
     ]);
   }
