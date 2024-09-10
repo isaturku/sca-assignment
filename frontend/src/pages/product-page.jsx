@@ -115,10 +115,9 @@ const ProductPage = () => {
           </div> : <></>}
 
 
-          {/* Price and Add to Cart */}
           <div className="mt-4">
             <span className="text-xl font-semibold">{data.product.price}{data.product.currency}</span>
-            <button className="bg-primary hover:bg-primary/75 transition text-white rounded-lg py-2 px-6 ml-4">
+            <button className="bg-primary hover:bg-primary/75 transition text-white rounded-lg py-2 px-6 ml-4" data-testid="add-to-cart">
               Add to Cart
             </button>
           </div>

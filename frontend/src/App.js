@@ -30,7 +30,7 @@ const App = () => {
         </header >
         <main className="relative px-[8vw] w-full ">
           <CartPopup isOpen={isCartPopupOpen} />
-          <div className={cn("z-10  absolute  top-0 left-0 right-0  h-svh transition", { "bg-black/45": isCartPopupOpen, "hidden": !isCartPopupOpen })} data-testid="cart-overlay">
+          <div className={cn("z-10  absolute  top-0 left-0 right-0  h-svh transition", { "bg-black/45": isCartPopupOpen, "hidden": !isCartPopupOpen })} data-testid="cart-overlay" onClick={() => setCartPopupOpen(false)}>
           </div>
           <Routes>
             <Route path="/all" element={<ProductsPage category="" />} />
