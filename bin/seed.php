@@ -73,6 +73,12 @@ foreach ($json_data["data"]["products"] as $product) {
       $entityManager->flush();
       $entityManager->clear(); // Detaches all objects from Doctrine!
     }
+    foreach ($product["attributes"] as $as) {
+      switch ($as["id"]) {
+        case "Size":
+          break;
+      }
+    }
   }
 }
 
