@@ -123,11 +123,10 @@ const ProductPage = () => {
 
           <div className="mt-4">
             <span className="text-xl font-semibold">{data.product.price}{data.product.currency}</span>
-            {data.product.inStock.toString()}
             <button
-              className={cn(`bg-primary hover:bg-primary/75 transition text-white rounded-lg py-2 px-6 ml-4`, { "bg-gray-400 hover:bg-gray-400": !data.product.inStock })}
+              className={cn(`bg-primary hover:bg-primary/75 transition text-white rounded-lg py-2 px-6 ml-4`, { "bg-gray-400 hover:bg-gray-400": !data.product.inStock || (data.product.colors.length > 0 && !selectedColor) || (data.product.sizes.length > 0 && !selectedSize) || (data.product.capa.length > 0 && !selectedCapacity) })}
               data-testid="add-to-cart"
-              disabled={!data.product.inStock}
+              disabled={!data.product.inStock || (data.product.colors.length > 0 && !selectedColor) || (data.product.sizes.length > 0 && !selectedSize) || (data.product.capa.length > 0 && !selectedCapacity)}
               onClick={() => { addItem({ id, price: data.product.price, capacity: selectedCapacity, color: selectedColor, size: selectedSize }); setIsCartOpen(true) }}
             >
               Add to Cart
