@@ -32,7 +32,6 @@ export const CartItem = ({ id, quantity, selectedAttributes }) => {
   }
 }
 `);
-  console.log(getItem(id))
   return (loading ? <div>Loading</div> :
     <div className="flex items-center justify-between border-b pb-4">
       <div className="flex">

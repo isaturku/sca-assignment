@@ -7,30 +7,28 @@ import React, { useEffect, useState } from "react";
 import ProductPage from "./pages/product-page";
 import { CartPopup } from "./components/cart";
 import { CartProvider } from "react-use-cart";
+import { useCartOverLayContext } from "./state/CartOverlay";
 
 
 const App = () => {
   const navigate = useNavigate()
   const location = useLocation()
-  const [isCartPopupOpen, setCartPopupOpen] = useState(false)
+  const { isCartOpen, setIsCartOpen, toggleCartPopupOpen } = useCartOverLayContext()
   useEffect(() => { if (location.pathname === "/") navigate("/all") }, [])
-  const toggleCartPopupOpen = () => {
-    setCartPopupOpen((prev) => !prev)
-  }
 
   return (
     <>
       <CartProvider>
         <header>
-          <Nav toggleCartPopupOpen={toggleCartPopupOpen} isCartPopupOpen={isCartPopupOpen}>
+          <Nav toggleCartPopupOpen={toggleCartPopupOpen} isCartPopupOpen={isCartOpen}>
             <NavLink active={location.pathname === "/all"} path="/all">All</NavLink>
             <NavLink active={location.pathname === "/clothes"} path="/clothes">Clothes</NavLink>
             <NavLink active={location.pathname === "/tech"} path="/tech">Tech</NavLink>
           </Nav>
         </header >
         <main className="relative px-[8vw] w-full ">
-          <CartPopup isOpen={isCartPopupOpen} />
-          <div className={cn("z-10  absolute  top-0 left-0 right-0  h-svh transition", { "bg-black/45": isCartPopupOpen, "hidden": !isCartPopupOpen })} data-testid="cart-overlay" onClick={() => setCartPopupOpen(false)}>
+          <CartPopup />
+          <div className={cn("z-10  absolute  top-0 left-0 right-0  h-svh transition", { "bg-black/45": isCartOpen, "hidden": !isCartOpen })} data-testid="cart-overlay" onClick={() => setIsCartOpen(false)}>
           </div>
           <Routes>
             <Route path="/all" element={<ProductsPage category="" />} />

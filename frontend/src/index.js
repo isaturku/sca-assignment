@@ -9,6 +9,7 @@ import {
 } from "react-router-dom";
 
 import { ApolloClient, InMemoryCache, ApolloProvider } from '@apollo/client';
+import { CartOverLayContextProvider } from "./state/CartOverlay";
 
 const client = new ApolloClient({
   uri: process.env.REACT_APP_BACKEND_URI,
@@ -27,7 +28,9 @@ const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
     <ApolloProvider client={client}>
-      <RouterProvider router={router} />
+      <CartOverLayContextProvider>
+        <RouterProvider router={router} />
+      </CartOverLayContextProvider>
     </ApolloProvider>
   </React.StrictMode>
 );

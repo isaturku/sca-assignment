@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import { useParams } from "react-router";
 import parse from 'html-react-parser';
 import DOMPurify from 'dompurify';
+import { useCart } from "react-use-cart";
 
 const htmlFrom = (htmlString) => {
   const cleanHtmlString = DOMPurify.sanitize(htmlString,
@@ -13,6 +14,7 @@ const htmlFrom = (htmlString) => {
 
 const ProductPage = () => {
   let { id } = useParams()
+  const { addItem } = useCart()
   const { loading, error, data } = useQuery(gql`
 {
   product(id: "${id}") {
@@ -118,7 +120,12 @@ const ProductPage = () => {
 
           <div className="mt-4">
             <span className="text-xl font-semibold">{data.product.price}{data.product.currency}</span>
-            <button className="bg-primary hover:bg-primary/75 transition text-white rounded-lg py-2 px-6 ml-4" data-testid="add-to-cart" disabled={!data.product.inStock}>
+            <button
+              className="bg-primary hover:bg-primary/75 transition text-white rounded-lg py-2 px-6 ml-4"
+              data-testid="add-to-cart"
+              disabled={!data.product.inStock}
+              onClick={() => { addItem({ id, price: data.product.price, capacity: selectedCapacity, color: selectedColor, size: selectedSize }) }}
+            >
               Add to Cart
             </button>
           </div>

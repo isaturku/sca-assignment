@@ -1,7 +1,9 @@
 import { ReactComponent as Logo } from "../../logo.svg"
 import { ReactComponent as Cart } from "../../cart.svg"
+import { useCartOverLayContext } from "../../state/CartOverlay"
 
-export const Nav = ({ children, toggleCartPopupOpen, isCartPopupOpen }) => {
+export const Nav = ({ children, }) => {
+  const { toggleCartPopupOpen } = useCartOverLayContext();
   return (
     <nav className="flex justify-between pt-4 px-[8vw]">
       <ul className="flex gap-4">

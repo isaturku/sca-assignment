@@ -16,7 +16,6 @@ query {
   }
 }
 `);
-  useEffect(() => console.log(data), [data])
   return (
     <div className="flex flex-col gap-12">
       <h1 className="font-semibold text-4xl capitalize">{category}</h1>
