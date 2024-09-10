@@ -17,7 +17,7 @@ export const CartPopup = ({ isOpen }) => {
         <div className="mt-6">
           <div className="flex justify-between text-lg font-semibold">
             <span>Total</span>
-            <span>{cartTotal}$</span>
+            <span data-testid='cart-total'>{cartTotal}$</span>
           </div>
           <button className="mt-4 w-full bg-green-500 text-white rounded-lg py-2">
             PLACE ORDER
