@@ -47,7 +47,7 @@ export const CartItem = ({ id, quantity, selectedAttributes }) => {
           {data.product.sizes.length > 0 ? <div className="mt-4">
             <span className="font-semibold">Size:</span>
             <div className="flex space-x-2 mt-2" data-testid="product-attribute-size">
-              {data.product?.sizes.map((size) => <button data-testid={`product-attribute-size-${size.id.toLowerCase().replaceAll(" ", "-")}`}
+              {data.product?.sizes.map((size) => <button data-testid={`product-attribute-size-${size.id.toLowerCase().replaceAll(" ", "-")}${getItem(id).size === size.id ? "-selected" : ""}`}
                 key={size.id}
                 className={`border rounded-md py-2 px-4 transition  ${getItem(id).size === size.id ? "bg-black text-white" : ""}`}
                 onClick={() => updateItem(id, { ...getItem(id), size: size.id })}
@@ -62,7 +62,7 @@ export const CartItem = ({ id, quantity, selectedAttributes }) => {
           {data.product?.capacities.length > 0 ? <div className="mt-4">
             <span className="font-semibold">Capacity:</span>
             <div className="flex space-x-2 mt-2" data-testid="product-attribute-capacity">
-              {data.product?.capacities.map((capacity) => <button data-testid={`product-attribute-capacity-${capacity.id}`}
+              {data.product?.capacities.map((capacity) => <button data-testid={`product-attribute-capacity-${capacity.id}${getItem(id).capacity === capacity.id ? "-selected" : ""}`}
                 key={capacity.id}
                 className={`border rounded-md py-2 px-4 transition ${getItem(id).capacity === capacity.id ? "bg-black text-white" : ""}`}
                 onClick={() => updateItem(id, { ...getItem(id), capacity: capacity.id })}
@@ -76,7 +76,7 @@ export const CartItem = ({ id, quantity, selectedAttributes }) => {
           {data.product?.colors.length > 0 ? <div className="mt-4">
             <span className="font-semibold">Color:</span>
             <div className="flex space-x-2 mt-2" data-testid="product-attribute-color">
-              {data.product?.colors.map((color) => <button data-testid={`product-attribute-color-${color.id}`}
+              {data.product?.colors.map((color) => <button data-testid={`product-attribute-color-${color.id}${getItem(id).color === color.id ? "-selected" : ""}`}
                 key={color.id}
                 className={`w-10 h-10  ${getItem(id).color === color.id ? "ring-2 ring-primary" : ""}`}
                 style={{ backgroundColor: color.value }}

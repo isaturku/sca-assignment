@@ -21,6 +21,7 @@ const ProductPage = () => {
     price
     currency
     description
+    inStock
     gallery {
       link
     }

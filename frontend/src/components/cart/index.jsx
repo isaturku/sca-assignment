@@ -6,7 +6,7 @@ export const CartPopup = ({ isOpen }) => {
   const { totalItems, items, cartTotal } = useCart()
   return (
     <div
-      className={cn("absolute top-0 right-[8vw] z-50  h-fit max-h-[50svh] bg-white shadow-lg transform transition scroll-auto overflow-auto w-fit", { "scale-100": isOpen, " scale-0": !isOpen })}
+      className={cn("absolute top-0 right-[8vw] z-50 min-w-80  h-fit max-h-[50svh] bg-white shadow-lg transform transition scroll-auto overflow-auto w-fit", { "scale-100": isOpen, " scale-0": !isOpen })}
     >
       <div className="p-6">
         <h2 className="text-xl font-semibold">My Bag, {totalItems} {totalItems > 1 ? "items" : "item"}</h2>
