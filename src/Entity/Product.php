@@ -22,11 +22,11 @@ class Product
   public string $name;
   #[Column(name: "in_stock")]
   public bool $inStock;
-  #[Column]
+  #[Column(type: "text")]
   public string $description;
   #[Column]
   public string $category;
-  #[OneToMany(targetEntity: Picture::class, mappedBy: "product")]
+  #[OneToMany(targetEntity: Picture::class, mappedBy: "product", cascade: ["persist"])]
   public Collection $gallery;
   #[Column]
   public string $brand;

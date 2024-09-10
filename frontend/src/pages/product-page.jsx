@@ -17,12 +17,13 @@ const ProductPage = () => {
       <div className="flex">
         <div className="flex basis-1/2">
           <div className="flex flex-col p-2 space-y-2 mr-2">
-            <img
-              src="/product1.png"
-              alt="Thumbnail"
-              className="w-16 h-16 rounded-lg cursor-pointer"
-            />
-
+            {
+              <img
+                src={img}
+                alt="Thumbnail"
+                className="w-16 h-16 rounded-lg cursor-pointer"
+              />
+            }
             <img
               src="/product1.png"
               alt="Thumbnail"

@@ -9,5 +9,5 @@ use Doctrine\ORM\Mapping\Entity;
 use Doctrine\ORM\Mapping\Table;
 
 #[Entity]
-#[Table("color")]
-class Color extends Attribute {}
+#[Table("size")]
+class Size extends Attribute {}

@@ -24,6 +24,8 @@ class ProductType extends ObjectType
         "gallery" => Type::listOf(TypeRegistry::type(PictureType::class)),
         "brand" => Type::string(),
         "attributes" => Type::listOf(TypeRegistry::type(AttributeType::class)),
+        "price" => Type::float(),
+        "currency" => Type::string()
       ]
     ]);
   }
