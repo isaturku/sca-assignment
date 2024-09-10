@@ -47,7 +47,7 @@ export const CartItem = ({ id, quantity, selectedAttributes }) => {
           {data.product.sizes.length > 0 ? <div className="mt-4">
             <span className="font-semibold">Size:</span>
             <div className="flex space-x-2 mt-2" data-testid="product-attribute-size">
-              {data.product?.sizes.map((size) => <button data-testid={`product-attribute-color-${size.id}`}
+              {data.product?.sizes.map((size) => <button data-testid={`product-attribute-size-${size.id}`}
                 key={size.id}
                 className={`border rounded-md py-2 px-4 transition  ${selectedAttributes?.selectedSize === size.id ? "bg-black text-white" : ""}`}
               // onClick={() => setSelectedSize(size.id)}
@@ -62,10 +62,10 @@ export const CartItem = ({ id, quantity, selectedAttributes }) => {
           {data.product?.capacities.length > 0 ? <div className="mt-4">
             <span className="font-semibold">Capacity:</span>
             <div className="flex space-x-2 mt-2" data-testid="product-attribute-capacity">
-              {data.product?.capacities.map((capacity) => <button data-testid={`product-attribute-color-${capacity.id}`}
+              {data.product?.capacities.map((capacity) => <button data-testid={`product-attribute-capacity-${capacity.id}`}
                 key={capacity.id}
-                className={`border rounded-md py-2 px-4 transition ${selectedAttributes?.selectedCapacity === capacity.id ? "bg-black text-white" : ""}`}
-                onClick={() => updateItem(id, { ...getItem(id), selectedAttributes: { ...getItem(id).selectedAttributes, selectedCapacity: capacity.id } })}
+                className={`border rounded-md py-2 px-4 transition ${capacity === capacity.id ? "bg-black text-white" : ""}`}
+                onClick={() => updateItem(id, { ...getItem(id), capacity: capacity.id })}
               >
                 {capacity.displayValue}
               </button>
@@ -78,9 +78,9 @@ export const CartItem = ({ id, quantity, selectedAttributes }) => {
             <div className="flex space-x-2 mt-2" data-testid="product-attribute-color">
               {data.product?.colors.map((color) => <button data-testid={`product-attribute-color-${color.id}`}
                 key={color.id}
-                className={`w-10 h-10  ${selectedAttributes?.selectedColor === color.id ? "ring-2 ring-primary" : ""}`}
+                className={`w-10 h-10  ${getItem(id).color === color.id ? "ring-2 ring-primary" : ""}`}
                 style={{ backgroundColor: color.value }}
-              // onClick={() => setSelectedColor(color.id)}
+                onClick={() => updateItem(id, { ...getItem(id), color: color.id })}
               ></button>
               )}
             </div>
@@ -92,6 +92,6 @@ export const CartItem = ({ id, quantity, selectedAttributes }) => {
         <span className="mx-2" data-testid='cart-item-amount'>{quantity}</span>
         <button className="border rounded-md p-1" onClick={() => updateItem(id, { ...getItem(id), quantity: getItem(id).quantity + 1 })}>+</button>
       </div>
-    </div>
+    </div >
   )
 }
