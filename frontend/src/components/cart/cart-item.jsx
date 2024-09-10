@@ -47,10 +47,10 @@ export const CartItem = ({ id, quantity, selectedAttributes }) => {
           {data.product.sizes.length > 0 ? <div className="mt-4">
             <span className="font-semibold">Size:</span>
             <div className="flex space-x-2 mt-2" data-testid="product-attribute-size">
-              {data.product?.sizes.map((size) => <button data-testid={`product-attribute-size-${size.id}`}
+              {data.product?.sizes.map((size) => <button data-testid={`product-attribute-size-${size.id.toLowerCase().replaceAll(" ", "-")}`}
                 key={size.id}
-                className={`border rounded-md py-2 px-4 transition  ${selectedAttributes?.selectedSize === size.id ? "bg-black text-white" : ""}`}
-              // onClick={() => setSelectedSize(size.id)}
+                className={`border rounded-md py-2 px-4 transition  ${getItem(id).size === size.id ? "bg-black text-white" : ""}`}
+                onClick={() => updateItem(id, { ...getItem(id), size: size.id })}
               >
                 {size.displayValue}
               </button>
@@ -64,7 +64,7 @@ export const CartItem = ({ id, quantity, selectedAttributes }) => {
             <div className="flex space-x-2 mt-2" data-testid="product-attribute-capacity">
               {data.product?.capacities.map((capacity) => <button data-testid={`product-attribute-capacity-${capacity.id}`}
                 key={capacity.id}
-                className={`border rounded-md py-2 px-4 transition ${capacity === capacity.id ? "bg-black text-white" : ""}`}
+                className={`border rounded-md py-2 px-4 transition ${getItem(id).capacity === capacity.id ? "bg-black text-white" : ""}`}
                 onClick={() => updateItem(id, { ...getItem(id), capacity: capacity.id })}
               >
                 {capacity.displayValue}
