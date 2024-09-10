@@ -8,6 +8,7 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping\Column;
 use Doctrine\ORM\Mapping\Entity;
 use Doctrine\ORM\Mapping\Id;
+use Doctrine\ORM\Mapping\ManyToMany;
 use Doctrine\ORM\Mapping\OneToMany;
 use Doctrine\ORM\Mapping\Table;
 
@@ -30,7 +31,7 @@ class Product
   public Collection $gallery;
   #[Column]
   public string $brand;
-  #[OneToMany(targetEntity: Attribute::class, mappedBy: "product")]
+  #[ManyToMany(targetEntity: Attribute::class, mappedBy: "product")]
   public Collection $attributes;
   #[Column]
   public float $price;

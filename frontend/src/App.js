@@ -12,7 +12,7 @@ const App = () => {
   const navigate = useNavigate()
   const location = useLocation()
   const [isCartPopupOpen, setCartPopupOpen] = useState(false)
-  useEffect(() => navigate("/all"), [])
+  useEffect(() => { if (location.pathname === "/") navigate("/all") }, [])
   const toggleCartPopupOpen = () => {
     setCartPopupOpen((prev) => !prev)
   }
@@ -31,7 +31,7 @@ const App = () => {
         <div className={cn("z-10  absolute  top-0 left-0 right-0  h-svh transition", { "bg-black/45": isCartPopupOpen, "hidden": !isCartPopupOpen })} data-testid="cart-overlay">
         </div>
         <Routes>
-          <Route path="/all" element={<ProductsPage category="all" />} />
+          <Route path="/all" element={<ProductsPage category="" />} />
           <Route path="/clothes" element={<ProductsPage category="clothes" />} />
           <Route path="/tech" element={<ProductsPage category="tech" />} />
           <Route path="/products/:id" element={<ProductPage />} />

@@ -4,13 +4,16 @@ declare(strict_types=1);
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping\Column;
 use Doctrine\ORM\Mapping\DiscriminatorColumn;
 use Doctrine\ORM\Mapping\DiscriminatorMap;
 use Doctrine\ORM\Mapping\Entity;
 use Doctrine\ORM\Mapping\Id;
 use Doctrine\ORM\Mapping\InheritanceType;
-use Doctrine\ORM\Mapping\ManyToOne;
+use Doctrine\ORM\Mapping\JoinTable;
+use Doctrine\ORM\Mapping\ManyToMany;
 use Doctrine\ORM\Mapping\Table;
 
 #[Entity]
@@ -21,12 +24,17 @@ use Doctrine\ORM\Mapping\Table;
 class Attribute
 {
   #[Id]
-  #[Column]
+  #[Column(length: 255)]
   public string $id;
   #[Column]
   public string $value;
   #[Column(name: "display_value")]
   public string $displayValue;
-  #[ManyToOne(inversedBy: "attributes")]
-  public Product $product;
+  #[ManyToMany(targetEntity: Product::class, inversedBy: "attributes")]
+  #[JoinTable(name: "product_attributes")]
+  public Collection $products;
+  public function __construct()
+  {
+    $this->products = new ArrayCollection();
+  }
 }

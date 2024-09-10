@@ -1,8 +1,11 @@
 <?php
 
+use App\Entity\Capacity;
 use App\Entity\Category;
+use App\Entity\Color;
 use App\Entity\Picture;
 use App\Entity\Product;
+use App\Entity\Size;
 use Doctrine\ORM\Tools\Console\ConsoleRunner;
 use Doctrine\ORM\Tools\Console\EntityManagerProvider\SingleManagerProvider;
 use Doctrine\DBAL\DriverManager;
@@ -45,6 +48,7 @@ $batchSize = 20;
 
 $i = 0;
 
+$ids = array();
 foreach ($json_data["data"]["products"] as $product) {
   $i++;
   $productEntity = new Product();
@@ -68,17 +72,56 @@ foreach ($json_data["data"]["products"] as $product) {
       array_push($gallery, $pic);
     }
     $productEntity->gallery = new ArrayCollection($gallery);
-    $entityManager->persist($productEntity);
-    if (($i % $batchSize) === 0) {
-      $entityManager->flush();
-      $entityManager->clear(); // Detaches all objects from Doctrine!
+  }
+  foreach ($product["attributes"] as $as) {
+    switch ($as["id"]) {
+      case "Size":
+        foreach ($as["items"] as $ai) {
+          if (in_array($ai["id"], $ids))
+            continue;;
+          array_push($ids, $ai["id"]);
+          $na = new Size();
+          $na->id = $ai["id"];
+          $na->value = $ai["value"];
+          $na->displayValue = $ai["displayValue"];
+          /* $na->products->add($productEntity); */
+          $entityManager->persist($na);
+        }
+        break;
+      case "Color":
+        foreach ($as["items"] as $ai) {
+          var_dump($ids);
+          if (in_array($ai["id"], $ids))
+            continue;
+          array_push($ids, $ai["id"]);
+          $na = new Color();
+          $na->id = $ai["id"];
+          $na->value = $ai["value"];
+          $na->displayValue = $ai["displayValue"];
+          /* $na->products->add($productEntity); */
+          $entityManager->persist($na);
+        }
+      case "Capacity":
+        foreach ($as["items"] as $ai) {
+          if (in_array($ai["id"], $ids))
+            continue;
+          array_push($ids, $ai["id"]);
+          $na = new Capacity();
+          $na->id = $ai["id"];
+          $na->value = $ai["value"];
+          $na->displayValue = $ai["displayValue"];
+          /* $na->products->add($productEntity); */
+          $entityManager->persist($na);
+        }
+        break;
+
+        break;
     }
-    foreach ($product["attributes"] as $as) {
-      switch ($as["id"]) {
-        case "Size":
-          break;
-      }
-    }
+  }
+  $entityManager->persist($productEntity);
+  if (($i % $batchSize) === 0) {
+    $entityManager->flush();
+    $entityManager->clear(); // Detaches all objects from Doctrine!
   }
 }
 
