@@ -77,10 +77,25 @@ const ProductPage = () => {
             <div className="flex space-x-2 mt-2" data-testid="product-attribute-size">
               {data.product.sizes.map((size) => <button
                 key={size.id}
-                className={`border rounded-md py-2 px-4  ${selectedSize === size.id ? "bg-black text-white" : ""}`}
+                className={`border rounded-md py-2 px-4 transition  ${selectedSize === size.id ? "bg-black text-white" : ""}`}
                 onClick={() => setSelectedSize(size.id)}
               >
                 {size.displayValue}
+              </button>
+              )}
+            </div>
+          </div> : <></>}
+
+
+          {data.product.capacities.length > 0 ? <div className="mt-4">
+            <span className="font-semibold">Capacity:</span>
+            <div className="flex space-x-2 mt-2" data-testid="product-attribute-capacity">
+              {data.product.capacities.map((capacity) => <button
+                key={capacity.id}
+                className={`border rounded-md py-2 px-4 transition ${selectedCapacity === capacity.id ? "bg-black text-white" : ""}`}
+                onClick={() => setSelectedCapacity(capacity.id)}
+              >
+                {capacity.displayValue}
               </button>
               )}
             </div>
@@ -91,7 +106,7 @@ const ProductPage = () => {
             <div className="flex space-x-2 mt-2" data-testid="product-attribute-color">
               {data.product.colors.map((color) => <button
                 key={color}
-                className={`w-10 h-10 rounded-full border ${selectedColor === color.id ? "ring-2 ring-black" : ""}`}
+                className={`w-10 h-10  ${selectedColor === color.id ? "ring-2 ring-primary" : ""}`}
                 style={{ backgroundColor: color.value }}
                 onClick={() => setSelectedColor(color.id)}
               ></button>
@@ -99,24 +114,11 @@ const ProductPage = () => {
             </div>
           </div> : <></>}
 
-          {data.product.capacities.length > 0 ? <div className="mt-4">
-            <span className="font-semibold">Capacity:</span>
-            <div className="flex space-x-2 mt-2" data-testid="product-attribute-capacity">
-              {data.product.capacities.map((capacity) => <button
-                key={capacity.id}
-                className={`border rounded-md py-2 px-4 ${selectedCapacity === capacity.id ? "bg-black text-white" : ""}`}
-                onClick={() => setSelectedCapacity(capacity.id)}
-              >
-                {capacity.displayValue}
-              </button>
-              )}
-            </div>
-          </div> : <></>}
 
           {/* Price and Add to Cart */}
           <div className="mt-4">
             <span className="text-xl font-semibold">{data.product.price}{data.product.currency}</span>
-            <button className="bg-green-500 text-white rounded-lg py-2 px-6 ml-4">
+            <button className="bg-primary hover:bg-primary/75 transition text-white rounded-lg py-2 px-6 ml-4">
               Add to Cart
             </button>
           </div>
