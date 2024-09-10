@@ -26,6 +26,7 @@ export const ProductCard = ({ id, img, name, price, currency, inStock }) => {
         </div>
         <span className="font-thin">{name}</span>
         <span className="font-semibold">{price}{currency}</span>
+        {!inStock ? <span>Out of Stock</span> : <></>}
       </div>
     </Link >
   )
