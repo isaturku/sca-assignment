@@ -5,7 +5,7 @@ import { useCartOverLayContext } from "../../state/CartOverlay"
 import { gql, useMutation } from '@apollo/client';
 
 export const CartPopup = () => {
-  const { totalItems, items, cartTotal } = useCart()
+  const { totalItems, items, cartTotal, emptyCart } = useCart()
   const { isCartOpen: isOpen } = useCartOverLayContext()
   console.log(items)
   const [addOrder, { data, loading, error }] = useMutation(gql`
@@ -30,7 +30,12 @@ export const CartPopup = () => {
             <span>Total</span>
             <span data-testid='cart-total'>{cartTotal}$</span>
           </div>
-          <button className="mt-4 w-full bg-green-500 text-white rounded-lg py-2" onClick={() => addOrder({ variables: { items: items.map((i) => ({ product: i.id, quantity: i.quantity, color: i.color, capacity: i.capacity, size: i.size })) } })}>
+          <button
+            className="mt-4 w-full bg-green-500 text-white rounded-lg py-2"
+            onClick={() => {
+              addOrder({ variables: { items: items.map((i) => ({ product: i.id, quantity: i.quantity, color: i.color, capacity: i.capacity, size: i.size })) } })
+              emptyCart();
+            }}>
             PLACE ORDER
           </button>
         </div>
