@@ -4,7 +4,7 @@ import { ReactComponent as Cart } from "../../cart.svg"
 import { useCart } from "react-use-cart";
 import { useCartOverLayContext } from '../../state/CartOverlay'
 
-export const ProductCard = ({ id, img, name, price, currency }) => {
+export const ProductCard = ({ id, img, name, price, currency, inStock }) => {
   const { addItem } = useCart()
   const { setIsCartOpen } = useCartOverLayContext()
   return (
@@ -14,6 +14,8 @@ export const ProductCard = ({ id, img, name, price, currency }) => {
           <img src={img} className="h-full w-full object-cover object-top" />
           <button
             className="absolute rounded-full bg-primary bottom-0 translate-y-1/2 right-4 p-4 hidden group-hover:block stroke-white fill-white hover:bg-primary/75 z-50"
+            disabled={!data.product.inStock}
+            data-testid="add-to-cart"
             onClick={(e) => {
               e.preventDefault();
               addItem({ id, price });
