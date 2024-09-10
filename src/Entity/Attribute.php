@@ -20,7 +20,7 @@ use Doctrine\ORM\Mapping\Table;
 #[Table("attribute")]
 #[InheritanceType('SINGLE_TABLE')]
 #[DiscriminatorColumn(name: 'discr', type: 'string')]
-#[DiscriminatorMap(['attribute' => Attribute::class, 'color' => Color::class, 'size' => Size::class, 'capacity' => Capacity::class])]
+#[DiscriminatorMap(['color' => Color::class, 'size' => Size::class, 'capacity' => Capacity::class])]
 class Attribute
 {
   #[Id]

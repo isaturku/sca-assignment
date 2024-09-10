@@ -3,16 +3,19 @@ import { ProductCard } from "../components/products-page/product-card"
 import { useQuery, gql } from '@apollo/client';
 
 export const ProductsPage = ({ category }) => {
-  const { loading, error, data } = useQuery(gql`query {products${category ? `(category:"${category}")` : ""}{
-id 
-name 
-price
-currency
-gallery{
-link
+  const { loading, error, data } = useQuery(gql`
+query {
+  products ${category ? `(category:"${category}")` : ""}{
+    id
+    name
+    price
+    currency
+    gallery {
+      link
+    }
+  }
 }
-}
-}`);
+`);
   useEffect(() => console.log(data), [data])
   return (
     <div className="flex flex-col gap-12">

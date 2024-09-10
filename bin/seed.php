@@ -77,44 +77,44 @@ foreach ($json_data["data"]["products"] as $product) {
     switch ($as["id"]) {
       case "Size":
         foreach ($as["items"] as $ai) {
-          if (in_array($ai["id"], $ids))
-            continue;;
+          if (in_array($ai["id"], $ids)) {
+            continue;
+          }
           array_push($ids, $ai["id"]);
           $na = new Size();
           $na->id = $ai["id"];
           $na->value = $ai["value"];
           $na->displayValue = $ai["displayValue"];
-          /* $na->products->add($productEntity); */
+          $na->products->add($productEntity);
           $entityManager->persist($na);
         }
         break;
       case "Color":
         foreach ($as["items"] as $ai) {
-          var_dump($ids);
-          if (in_array($ai["id"], $ids))
+          if (in_array($ai["id"], $ids)) {
             continue;
+          }
           array_push($ids, $ai["id"]);
           $na = new Color();
           $na->id = $ai["id"];
           $na->value = $ai["value"];
           $na->displayValue = $ai["displayValue"];
-          /* $na->products->add($productEntity); */
+          $na->products->add($productEntity);
           $entityManager->persist($na);
         }
       case "Capacity":
         foreach ($as["items"] as $ai) {
-          if (in_array($ai["id"], $ids))
+          if (in_array($ai["id"], $ids)) {
             continue;
+          }
           array_push($ids, $ai["id"]);
           $na = new Capacity();
           $na->id = $ai["id"];
           $na->value = $ai["value"];
           $na->displayValue = $ai["displayValue"];
-          /* $na->products->add($productEntity); */
+          $na->products->add($productEntity);
           $entityManager->persist($na);
         }
-        break;
-
         break;
     }
   }

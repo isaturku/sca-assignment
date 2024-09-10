@@ -13,26 +13,40 @@ const htmlFrom = (htmlString) => {
 
 const ProductPage = () => {
   let { id } = useParams()
-  const { loading, error, data } = useQuery(gql`query {product(id:"${id}"){
-id 
-name 
-price
-currency
-description
-gallery{
-link
+  const { loading, error, data } = useQuery(gql`
+{
+  product(id: "${id}") {
+    id
+    name
+    price
+    currency
+    description
+    gallery {
+      link
+    }
+    colors {
+      id
+      value
+      displayValue
+    }
+    capacities {
+      id
+      value
+      displayValue
+    }
+    sizes {
+      id
+      value
+      displayValue
+    }
+  }
 }
- #attributes{
-#id
-#value
-#displayValue
-#}
-}
-}`);
+`);
 
   const [selectedImage, setSelectedImage] = useState(0);
   const [selectedSize, setSelectedSize] = useState();
   const [selectedColor, setSelectedColor] = useState();
+  const [selectedCapacity, setSelectedCapacity] = useState();
 
   return (loading ? <div className="h-svh w-full flex justify-center items-center text-xl">Loading...</div> :
     <div className="container mx-auto px-4 py-8">
@@ -58,32 +72,46 @@ link
         <div className="basis-1/2 pl-8">
           <h1 className="text-3xl font-semibold">{data.product.name}</h1>
 
-          <div className="mt-4">
+          {data.product.sizes.length > 0 ? <div className="mt-4">
             <span className="font-semibold">Size:</span>
-            <div className="flex space-x-2 mt-2">
-              <button
-              // key={size}
-              // className={`border rounded-md py-2 px-4 ${selectedSize === size ? "bg-black text-white" : ""
-              // }`}
-              // onClick={() => setSelectedSize(size)}
+            <div className="flex space-x-2 mt-2" data-testid="product-attribute-size">
+              {data.product.sizes.map((size) => <button
+                key={size.id}
+                className={`border rounded-md py-2 px-4  ${selectedSize === size.id ? "bg-black text-white" : ""}`}
+                onClick={() => setSelectedSize(size.id)}
               >
-                ""
+                {size.displayValue}
               </button>
+              )}
             </div>
-          </div>
+          </div> : <></>}
 
-          {/* Color Selection */}
-          <div className="mt-4">
+          {data.product.colors.length > 0 ? <div className="mt-4">
             <span className="font-semibold">Color:</span>
-            <div className="flex space-x-2 mt-2">
-              <button
-              // key={color}
-              // className={`w-10 h-10 rounded-full border ${selectedColor === color ? "ring-2 ring-black" : ""
-              // } ${bgColor}`}
-              // onClick={() => setSelectedColor(color)}
+            <div className="flex space-x-2 mt-2" data-testid="product-attribute-color">
+              {data.product.colors.map((color) => <button
+                key={color}
+                className={`w-10 h-10 rounded-full border ${selectedColor === color.id ? "ring-2 ring-black" : ""}`}
+                style={{ backgroundColor: color.value }}
+                onClick={() => setSelectedColor(color.id)}
               ></button>
+              )}
             </div>
-          </div>
+          </div> : <></>}
+
+          {data.product.capacities.length > 0 ? <div className="mt-4">
+            <span className="font-semibold">Capacity:</span>
+            <div className="flex space-x-2 mt-2" data-testid="product-attribute-capacity">
+              {data.product.capacities.map((capacity) => <button
+                key={capacity.id}
+                className={`border rounded-md py-2 px-4 ${selectedCapacity === capacity.id ? "bg-black text-white" : ""}`}
+                onClick={() => setSelectedCapacity(capacity.id)}
+              >
+                {capacity.displayValue}
+              </button>
+              )}
+            </div>
+          </div> : <></>}
 
           {/* Price and Add to Cart */}
           <div className="mt-4">

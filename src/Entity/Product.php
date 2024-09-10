@@ -11,6 +11,7 @@ use Doctrine\ORM\Mapping\Id;
 use Doctrine\ORM\Mapping\ManyToMany;
 use Doctrine\ORM\Mapping\OneToMany;
 use Doctrine\ORM\Mapping\Table;
+use Doctrine\ORM\Mapping\JoinTable;
 
 #[Entity]
 #[Table("product")]
@@ -31,8 +32,12 @@ class Product
   public Collection $gallery;
   #[Column]
   public string $brand;
-  #[ManyToMany(targetEntity: Attribute::class, mappedBy: "product")]
-  public Collection $attributes;
+  #[ManyToMany(targetEntity: Color::class, mappedBy: "products")]
+  public Collection $colors;
+  #[ManyToMany(targetEntity: Capacity::class, mappedBy: "products")]
+  public Collection $capacities;
+  #[ManyToMany(targetEntity: Size::class, mappedBy: "products")]
+  public Collection $sizes;
   #[Column]
   public float $price;
   #[Column]
