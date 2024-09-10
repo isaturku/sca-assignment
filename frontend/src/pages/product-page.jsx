@@ -19,7 +19,7 @@ const ProductPage = () => {
           <div className="flex flex-col p-2 space-y-2 mr-2" data-testid="product-gallery">
             {
               <img
-                src={img}
+                src={""}
                 alt="Thumbnail"
                 className="w-16 h-16 rounded-lg cursor-pointer"
               />
