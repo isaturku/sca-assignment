@@ -11,7 +11,15 @@ use GraphQL\Type\Definition\Type;
 use GraphQL\Type\Schema;
 use GraphQL\Type\SchemaConfig;
 use App\Config\DoctrineManager;
+use App\Entity\Capacity;
+use App\Entity\Color;
+use App\Entity\Order;
+use App\Entity\OrderItem;
 use App\Entity\Product;
+use App\Entity\Size;
+use App\Type\OrderItemInputType;
+use App\Type\OrderItemType;
+use App\Type\OrderType;
 use App\Type\ProductType;
 use App\Type\TypeRegistry;
 use RuntimeException;
@@ -58,13 +66,32 @@ class GraphQL
       $mutationType = new ObjectType([
         'name' => 'Mutation',
         'fields' => [
-          'sum' => [
-            'type' => Type::int(),
+          'createOrder' => [
+            'type' => TypeRegistry::type(OrderType::class),
             'args' => [
-              'x' => ['type' => Type::int()],
-              'y' => ['type' => Type::int()],
+              'items' =>  Type::listOf(TypeRegistry::type(OrderItemInputType::class)),
             ],
-            'resolve' => static fn($calc, array $args): int => $args['x'] + $args['y'],
+            'resolve' => static function ($calc, array $args) {
+              $newOrder = new Order();
+              foreach ($args["items"] as $oi) {
+                $newOrderItem = new OrderItem();
+                $newOrderItem->order = $newOrder;
+                $newOrderItem->quantity = $oi["quantity"];
+                $newOrderItem->product = DoctrineManager::getEntityManager()->find(Product::class, $oi["product"]);
+                if (array_key_exists("capacity", $oi))
+                  $newOrderItem->capacity = DoctrineManager::getEntityManager()->find(Capacity::class, $oi["capacity"]);
+                if (array_key_exists("size", $oi))
+                  $newOrderItem->size = DoctrineManager::getEntityManager()->find(Size::class, $oi["size"]);
+                if (array_key_exists("color", $oi))
+                  $newOrderItem->color = DoctrineManager::getEntityManager()->find(Color::class, $oi["color"]);
+                $newOrder->items->add($newOrderItem);
+                DoctrineManager::getEntityManager()->persist($newOrderItem);
+                DoctrineManager::getEntityManager()->flush();
+                DoctrineManager::getEntityManager()->clear();
+              }
+              DoctrineManager::getEntityManager()->persist($newOrder);
+              DoctrineManager::getEntityManager()->clear();
+            }
           ],
         ],
       ]);
