@@ -64,6 +64,7 @@ foreach ($json_data["data"]["products"] as $product) {
     foreach ($product["gallery"] as $photo) {
       $pic = new Picture();
       $pic->link = $photo;
+      $pic->product = $productEntity;
       array_push($gallery, $pic);
     }
     $productEntity->gallery = new ArrayCollection($gallery);

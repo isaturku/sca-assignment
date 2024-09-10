@@ -16,7 +16,7 @@ const ProductPage = () => {
     <div className="container mx-auto px-4 py-8">
       <div className="flex">
         <div className="flex basis-1/2">
-          <div className="flex flex-col p-2 space-y-2 mr-2">
+          <div className="flex flex-col p-2 space-y-2 mr-2" data-testid="product-gallery">
             {
               <img
                 src={img}
@@ -80,7 +80,7 @@ const ProductPage = () => {
           </div>
 
           {/* Product Description */}
-          <div className="mt-4 text-gray-600">
+          <div className="mt-4 text-gray-600" data-testid="product-description">
             <p>
               Find stunning women's cocktail dresses and party dresses. Stand
               out in lace and metallic cocktail dresses and party dresses from
