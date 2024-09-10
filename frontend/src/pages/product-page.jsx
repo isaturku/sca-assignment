@@ -5,6 +5,7 @@ import parse from 'html-react-parser';
 import DOMPurify from 'dompurify';
 import { useCart } from "react-use-cart";
 import { useCartOverLayContext } from "../state/CartOverlay";
+import { cn } from "../utils/cn";
 
 const htmlFrom = (htmlString) => {
   const cleanHtmlString = DOMPurify.sanitize(htmlString,
@@ -122,8 +123,9 @@ const ProductPage = () => {
 
           <div className="mt-4">
             <span className="text-xl font-semibold">{data.product.price}{data.product.currency}</span>
+            {data.product.inStock.toString()}
             <button
-              className="bg-primary hover:bg-primary/75 transition text-white rounded-lg py-2 px-6 ml-4"
+              className={cn(`bg-primary hover:bg-primary/75 transition text-white rounded-lg py-2 px-6 ml-4`, { "bg-gray-400 hover:bg-gray-400": !data.product.inStock })}
               data-testid="add-to-cart"
               disabled={!data.product.inStock}
               onClick={() => { addItem({ id, price: data.product.price, capacity: selectedCapacity, color: selectedColor, size: selectedSize }); setIsCartOpen(true) }}
