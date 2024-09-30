@@ -45,6 +45,16 @@ const ProductPage = () => {
       value
       displayValue
     }
+    usb3 {
+      id
+      value
+      displayValue
+    }
+    touchID {
+      id
+      value
+      displayValue
+    }
   }
 }
 `);
@@ -53,6 +63,8 @@ const ProductPage = () => {
   const [selectedSize, setSelectedSize] = useState();
   const [selectedColor, setSelectedColor] = useState();
   const [selectedCapacity, setSelectedCapacity] = useState();
+  const [usb3, setUSB3] = useState();
+  const [touchID, setTouchID] = useState();
 
   return (loading ? <div className="h-svh w-full flex justify-center items-center text-xl">Loading...</div> :
     <div className="container mx-auto px-4 py-8">
@@ -102,6 +114,34 @@ const ProductPage = () => {
                 onClick={() => setSelectedCapacity(capacity.id)}
               >
                 {capacity.displayValue}
+              </button>
+              )}
+            </div>
+          </div> : <></>}
+
+          {data.product.usb3.length > 0 ? <div className="mt-4">
+            <span className="font-semibold">With USB 3 Ports:</span>
+            <div className="flex space-x-2 mt-2" data-testid="product-attribute-capacity">
+              {data.product.usb3.map((u) => <button data-testid={`product-attribute-capacity-${u.id}`}
+                key={u.id}
+                className={`border rounded-md py-2 px-4 transition ${usb3 === u.id ? "bg-black text-white" : ""}`}
+                onClick={() => setUSB3(u.id)}
+              >
+                {u.displayValue}
+              </button>
+              )}
+            </div>
+          </div> : <></>}
+
+          {data.product.touchID.length > 0 ? <div className="mt-4">
+            <span className="font-semibold">Touch ID in Keyboard:</span>
+            <div className="flex space-x-2 mt-2" data-testid="product-attribute-capacity">
+              {data.product.touchID.map((t) => <button data-testid={`product-attribute-capacity-${t.id}`}
+                key={t.id}
+                className={`border rounded-md py-2 px-4 transition ${touchID === t.id ? "bg-black text-white" : ""}`}
+                onClick={() => setTouchID(t.id)}
+              >
+                {t.displayValue}
               </button>
               )}
             </div>
