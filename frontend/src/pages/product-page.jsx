@@ -122,7 +122,7 @@ const ProductPage = () => {
           {data.product.usb3.length > 0 ? <div className="mt-4">
             <span className="font-semibold">With USB 3 Ports:</span>
             <div className="flex space-x-2 mt-2" data-testid="product-attribute-capacity">
-              {data.product.usb3.map((u) => <button data-testid={`product-attribute-capacity-${u.id}`}
+              {data.product.usb3.map((u) => <button data-testid={`product-attribute-with-usb-3-ports-${u.id}`}
                 key={u.id}
                 className={`border rounded-md py-2 px-4 transition ${usb3 === u.id ? "bg-black text-white" : ""}`}
                 onClick={() => setUSB3(u.id)}
@@ -136,7 +136,7 @@ const ProductPage = () => {
           {data.product.touchID.length > 0 ? <div className="mt-4">
             <span className="font-semibold">Touch ID in Keyboard:</span>
             <div className="flex space-x-2 mt-2" data-testid="product-attribute-capacity">
-              {data.product.touchID.map((t) => <button data-testid={`product-attribute-capacity-${t.id}`}
+              {data.product.touchID.map((t) => <button data-testid={`product-attribute-touch-id-in-keyboard-${t.id}`}
                 key={t.id}
                 className={`border rounded-md py-2 px-4 transition ${touchID === t.id ? "bg-black text-white" : ""}`}
                 onClick={() => setTouchID(t.id)}

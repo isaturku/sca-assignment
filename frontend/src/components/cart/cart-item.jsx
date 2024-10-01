@@ -3,7 +3,7 @@ import { useCart } from "react-use-cart";
 
 export const CartItem = ({ id, quantity, selectedAttributes }) => {
   const { updateItem, getItem } = useCart()
-  const { loading, error, data } = useQuery(gql`
+  const { loading, data } = useQuery(gql`
 {
   product(id: "${id}") {
     id
@@ -25,6 +25,16 @@ export const CartItem = ({ id, quantity, selectedAttributes }) => {
       displayValue
     }
     sizes {
+      id
+      value
+      displayValue
+    }
+    usb3 {
+      id
+      value
+      displayValue
+    }
+    touchID {
       id
       value
       displayValue
@@ -67,6 +77,34 @@ export const CartItem = ({ id, quantity, selectedAttributes }) => {
                 onClick={() => updateItem(id, { ...getItem(id), capacity: capacity.id })}
               >
                 {capacity.displayValue}
+              </button>
+              )}
+            </div>
+          </div> : <></>}
+
+          {data.product?.usb3?.length > 0 ? <div className="mt-4">
+            <span className="font-semibold">With USB 3 Ports:</span>
+            <div className="flex space-x-2 mt-2" data-testid="product-attribute-capacity">
+              {data.product.usb3.map((u) => <button data-testid={`product-attribute-capacity-${u.id}`}
+                key={u.id}
+                className={`border rounded-md py-2 px-4 transition ${getItem(id).usb3 === u.id ? "bg-black text-white" : ""}`}
+                onClick={() => updateItem(id, { ...getItem(id), usb3: u.id })}
+              >
+                {u.displayValue}
+              </button>
+              )}
+            </div>
+          </div> : <></>}
+
+          {data.product?.touchID?.length > 0 ? <div className="mt-4">
+            <span className="font-semibold">Touch ID in Keyboard:</span>
+            <div className="flex space-x-2 mt-2" data-testid="product-attribute-capacity">
+              {data.product.touchID.map((t) => <button data-testid={`product-attribute-capacity-${t.id}`}
+                key={t.id}
+                className={`border rounded-md py-2 px-4 transition ${getItem(id).touchID === t.id ? "bg-black text-white" : ""}`}
+                onClick={() => updateItem(id, { ...getItem(id), touchID: t.id })}
+              >
+                {t.displayValue}
               </button>
               )}
             </div>

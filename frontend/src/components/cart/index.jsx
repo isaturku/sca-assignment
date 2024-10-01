@@ -11,7 +11,11 @@ export const CartPopup = () => {
   const [addOrder, { data, loading, error }] = useMutation(gql`
   mutation CreateOrder($items: [OrderItemInput!]!) {
   createOrder(items: $items) {
-    id
+id
+items{
+id
+quantity
+}
   }
 }`)
 
@@ -33,7 +37,7 @@ export const CartPopup = () => {
           <button
             className="mt-4 w-full bg-green-500 text-white rounded-lg py-2"
             onClick={() => {
-              addOrder({ variables: { items: items.map((i) => ({ product: i.id, quantity: i.quantity, color: i.color, capacity: i.capacity, size: i.size })) } })
+              addOrder({ variables: { items: items.map((i) => ({ product: i.id, quantity: i.quantity, color: i.color, capacity: i.capacity, size: i.size, usb3: i.usb3, touchID: i.touchID })) } })
               emptyCart();
             }}>
             PLACE ORDER

@@ -1,9 +1,8 @@
-import { useEffect } from "react";
 import { ProductCard } from "../components/products-page/product-card"
 import { useQuery, gql } from '@apollo/client';
 
 export const ProductsPage = ({ category }) => {
-  const { loading, error, data } = useQuery(gql`
+  const { loading, data } = useQuery(gql`
 query {
   products ${category ? `(category:"${category}")` : ""}{
     id
