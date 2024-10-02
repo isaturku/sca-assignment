@@ -18,6 +18,8 @@ class App extends React.Component {
     super(props);
   }
   componentDidMount() {
+    if (this.state.location.pathname === "/")
+      this.setState("/all")
   }
 
   render() {
