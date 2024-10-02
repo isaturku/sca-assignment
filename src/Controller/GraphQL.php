@@ -81,6 +81,7 @@ class GraphQL
                 foreach ($args["items"] as $oi) {
                   $newOrderItem = new OrderItem();
                   $newOrderItem->id = uniqid("oi_");
+                  $newOrderItem->order = $newOrder;
                   $newOrderItem->quantity = $oi["quantity"];
                   $newOrderItem->product = DoctrineManager::getEntityManager()->find(Product::class, $oi["product"]);
                   if (array_key_exists("capacity", $oi))
