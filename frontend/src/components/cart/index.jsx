@@ -69,7 +69,7 @@ class CartPopup extends React.Component {
                   <button
                     className="mt-4 w-full bg-green-500 text-white rounded-lg py-2"
                     onClick={() => this.handlePlaceOrder(addOrder)}
-                    disabled={loading}
+                    disabled={loading || totalItems === 0}
                   >
                     {loading ? 'PLACING ORDER...' : 'PLACE ORDER'}
                   </button>
