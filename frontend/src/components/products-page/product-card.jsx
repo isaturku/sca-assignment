@@ -1,8 +1,8 @@
-import { Link } from "react-router-dom";
 import { cn } from "../../utils/cn";
 import { ReactComponent as Cart } from "../../cart.svg"
 import { useCart } from "react-use-cart";
 import { useCartOverLayContext } from '../../state/CartOverlay'
+import { Link } from "react-router-dom";
 
 export const ProductCard = ({ id, img, name, price, currency, inStock }) => {
   const { addItem } = useCart()
